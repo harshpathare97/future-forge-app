@@ -9,10 +9,12 @@ export default function ResultPage() {
   useEffect(() => {
     const data = localStorage.getItem("userData");
 
-    if (!data) return;
+    if (!data) {
+      setLoading(false);
+      return;
+    }
 
     async function fetchPrediction() {
-        console.log("Fetching prediction with data:", data);
       try {
         const res = await fetch("/api/predict", {
           method: "POST",
@@ -24,11 +26,11 @@ export default function ResultPage() {
 
         const json = await res.json();
 
-        console.log(json);
+        console.log("Prediction:", json);
 
         setResult(json);
       } catch (error) {
-        console.error(error);
+        console.error("Error:", error);
       } finally {
         setLoading(false);
       }
@@ -39,32 +41,44 @@ export default function ResultPage() {
 
   if (loading) {
     return (
-      <p className="text-center mt-20 text-lg">Analyzing your future...</p>
+      <div className="min-h-screen flex items-center justify-center bg-black text-white text-xl">
+        Analyzing your future...
+      </div>
     );
   }
 
   if (!result) {
     return (
-      <p className="text-center mt-20 text-red-400">Something went wrong.</p>
+      <div className="min-h-screen flex items-center justify-center bg-black text-red-400">
+        Something went wrong.
+      </div>
     );
   }
 
+  const score = result.score || 70;
+
   return (
     <main className="min-h-screen p-10 bg-gradient-to-br from-black via-purple-900 to-indigo-900 text-white">
+      {/* Title */}
       <h1 className="text-4xl font-bold text-center mb-10">
         Your Future Dashboard
       </h1>
 
-      {/* Future Score */}
+      {/* Score */}
       <div className="max-w-xl mx-auto mb-12 text-center">
         <h3 className="text-xl mb-2">Future Readiness Score</h3>
 
         <div className="w-full bg-gray-700 h-4 rounded-full">
-          <div className="bg-gradient-to-r from-purple-500 to-indigo-500 h-4 rounded-full w-[75%]"></div>
+          <div
+            style={{ width: `${score}%` }}
+            className="bg-gradient-to-r from-purple-500 to-indigo-500 h-4 rounded-full"
+          />
         </div>
+
+        <p className="mt-2 text-lg">{score}%</p>
       </div>
 
-      {/* Grid */}
+      {/* Dashboard Grid */}
       <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
         {/* Careers */}
         <div className="bg-white/10 p-6 rounded-xl backdrop-blur-lg">
@@ -93,9 +107,9 @@ export default function ResultPage() {
           ))}
         </div>
 
-        {/* Reality Check */}
+        {/* Risks */}
         <div className="bg-red-900/30 border border-red-500 p-6 rounded-xl">
-          <h2 className="text-xl font-bold mb-4">Reality Check ⚠️</h2>
+          <h2 className="text-xl font-bold mb-4">Reality Check</h2>
 
           {result.risks?.map((r, i) => (
             <p key={i}>• {r}</p>

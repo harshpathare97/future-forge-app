@@ -1,11 +1,9 @@
 import Image from "next/image";
-import Navbar from "./components/Navbar";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      {/* <Navbar />   */}
       <main className="flex flex-col items-center justify-center h-screen text-center px-6 bg-gradient-to-r from-blue-600 to-purple-800">
         <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
           Future Forge: AI Career Predictor
