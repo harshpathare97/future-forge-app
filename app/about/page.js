@@ -81,6 +81,29 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Creators Section */}
+
+      <div className="max-w-5xl mx-auto mt-20 text-center">
+        <h2 className="text-3xl font-bold mb-10">Meet the Creators</h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl">
+            <h3 className="text-xl font-semibold">Harsh Bhanudas</h3>
+            <p className="text-gray-300 mt-2">AI & Backend Development</p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl">
+            <h3 className="text-xl font-semibold">Soham Vikhare</h3>
+            <p className="text-gray-300 mt-2">System Design & Architecture</p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl">
+            <h3 className="text-xl font-semibold">Pranjali Shinde</h3>
+            <p className="text-gray-300 mt-2">Frontend & User Experience</p>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
 
       <div className="text-center mt-20 text-gray-400">
